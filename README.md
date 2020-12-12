@@ -1,0 +1,2 @@
+# SecondJournal
+Reworked First Journal
