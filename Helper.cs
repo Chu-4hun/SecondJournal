@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
+using static Second_Journal.Program;
 
 namespace Second_Journal
 {
@@ -48,6 +50,52 @@ namespace Second_Journal
                 }
             }
         }
+        /*public int PersonMenu (List<AdminStrtuct> menu, int StartString)
+        {
+            ConsoleKeyInfo key;
+            int index = StartString;
+            int currentpos = index;
+            while (true)
+            {
+                Console.Clear();
+                int id = 1;
+                foreach (AdminStrtuct m in menu)
+                {
+                    Console.WriteLine($"{id} {m.fio}");
+                    id++;
+                }
+
+                Console.SetCursorPosition(0, index);
+                key = Console.ReadKey();
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                    {
+                        index--;
+                        if (index < 0)
+                        {
+                            index = id - 1;
+                        }
+                        break;
+                    }
+                    case ConsoleKey.DownArrow:
+                    {
+                        index++;
+                        if (index >= id)
+                        {
+                            index = 0;
+                        }
+                        break;
+                    }
+                    case ConsoleKey.Enter:
+                    {
+                        Console.Clear();
+                        return index;
+                    }
+                }
+                
+            }
+        }*/
         public string InfoUsers(string colums)
         {
             string name = "";
@@ -97,7 +145,6 @@ namespace Second_Journal
             }
             return validation;
         }
-
         public bool ValidationNUM(string num)
         {
             bool validation = true;

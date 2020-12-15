@@ -5,7 +5,7 @@ using static Second_Journal.Helper;
 
 namespace Second_Journal
 {
-    class Program
+    public class Program
     {
         public struct AdminStrtuct
         {
@@ -62,13 +62,13 @@ namespace Second_Journal
                 {
                     Console.Clear();
                     Console.Write("Login: ");
-                    String login = Console.ReadLine();
+                    string login = Console.ReadLine();
                     Console.Write("Password: ");
-                    String password = Console.ReadLine();
+                    string password = Console.ReadLine();
 
                     try
                     {
-                        String path = Directory.GetCurrentDirectory();
+                        string path = Directory.GetCurrentDirectory();
                         int Role = 0;
                         if (File.Exists(path + $@"\user\admin\{login}.dat"))
                         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using static Second_Journal.Program;
 
@@ -24,7 +25,7 @@ namespace Second_Journal
                     case 1:
                     {
                         Console.WriteLine("1");
-                        //UpdateUser();
+                        UpdateUser();
                         break;
                     }
                     case 2:
@@ -118,5 +119,47 @@ namespace Second_Journal
                 }
             }
         }
+
+        public void UpdateUser()
+        {
+            Console.Clear();
+            string[] role = new string[]{"Admin","Student","Teacher"};
+            string path = Directory.GetCurrentDirectory();
+            switch (helper.Menu(role,0))
+            {
+                case 1:
+                {
+                    path += @"\user\admin";
+                    List<AdminStrtuct> adminStat = new List<AdminStrtuct>();
+                    string[] Allfile = Directory.GetFiles(path);
+                    foreach (string filename in Allfile)
+                    {
+                        using (BinaryReader reader = new BinaryReader(File.Open(filename,FileMode.Open)))
+                        {
+                            adminStat.Add(new AdminStrtuct()
+                                {
+                                    A_login = Path.GetFileNameWithoutExtension(filename),
+                                    A_password = reader.ReadString(),
+                                }
+                            );
+                        }
+                    }
+                    Console.WriteLine(Allfile);
+                    break;
+                }
+                case 2:
+                {
+                    path += @"\user\student";
+                    break;
+                }
+                case 3:
+                {
+                    path += @"\user\teacher";
+                    break;
+                }
+            }
+            
+        }
+        
     }
 }
