@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using static Second_Journal.Helper;
+using static Second_Journal.Student;
 
 namespace Second_Journal
 {
@@ -102,8 +103,8 @@ namespace Second_Journal
                                     Console.WriteLine(Role);
                                     break;
                                 case 2:
-                                    //student student = new student();
-                                    //student.MainSudent();
+                                    Student student = new Student();
+                                    student.MainSudent();
                                     Console.WriteLine(Role);
                                     break;
                                 case 3:

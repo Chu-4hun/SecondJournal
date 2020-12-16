@@ -50,7 +50,7 @@ namespace Second_Journal
                 }
             }
         }
-        public int PersonMenu (List<AdminStrtuct> menu, int StartString)
+        public int AdminMenu (List<AdminStrtuct> menu, int StartString)
         {
             ConsoleKeyInfo key;
             int index = StartString;
@@ -62,6 +62,52 @@ namespace Second_Journal
                 foreach (AdminStrtuct m in menu)
                 {
                     Console.WriteLine($"{id} {m.A_login}");
+                    id++;
+                }
+
+                Console.SetCursorPosition(0, index);
+                key = Console.ReadKey();
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                    {
+                        index--;
+                        if (index < 0)
+                        {
+                            index = id - 1;
+                        }
+                        break;
+                    }
+                    case ConsoleKey.DownArrow:
+                    {
+                        index++;
+                        if (index >= id)
+                        {
+                            index = 0;
+                        }
+                        break;
+                    }
+                    case ConsoleKey.Enter:
+                    {
+                        Console.Clear();
+                        return index;
+                    }
+                }
+                
+            }
+        }
+        public int StudentMenu (List<StudentSruct> menu, int StartString)
+        {
+            ConsoleKeyInfo key;
+            int index = StartString;
+            int currentpos = index;
+            while (true)
+            {
+                Console.Clear();
+                int id = 0;
+                foreach (StudentSruct m in menu)
+                {
+                    Console.WriteLine($"{id} {m.S_login}");
                     id++;
                 }
 

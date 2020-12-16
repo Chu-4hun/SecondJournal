@@ -144,7 +144,7 @@ namespace Second_Journal
                             );
                         }
                     }
-                    int id = helper.PersonMenu(adminStat, 0);
+                    int id = helper.AdminMenu(adminStat, 0);
                     string[] parametr = new string[]{"Login", "Password"};
                     var PersonId = adminStat[id];
                     string safeLogin = PersonId.A_login;
@@ -173,6 +173,65 @@ namespace Second_Journal
                 case 1:
                 {
                     path += @"\user\student";
+                    
+                    List<StudentSruct> studentSruct = new List<StudentSruct>();
+                    string[] Allfile = Directory.GetFiles(path);
+                    foreach (string filename in Allfile)
+                    {
+                        using (BinaryReader reader = new BinaryReader(File.Open(filename,FileMode.Open)))
+                        {
+                            studentSruct.Add(new StudentSruct()
+                                {
+                                    S_login = Path.GetFileNameWithoutExtension(filename),
+                                    S_password = reader.ReadString(),
+                                }
+                            );
+                        }
+                    }
+                    int id = helper.StudentMenu(studentSruct, 0);
+                    string[] parametr = new string[]{"Login", "Password", "ФИО","Burthdate","Group"};
+                    var PersonId = studentSruct[id];
+                    string safeLogin = PersonId.S_login;
+                    switch (helper.Menu(parametr,0))
+                    {
+                        case 0:
+                        {
+                            PersonId.S_login = helper.InfoUsers("Login");
+                            File.Delete(path + $@"\{safeLogin}.dat");
+                            break;
+                        }
+                        case 1:
+                        {
+                            PersonId.S_password = helper.InfoUsers("Password");
+                            break;
+                        }
+                        case 2:
+                        {
+                            PersonId.S_fio = helper.InfoUsers("ФИО");
+                            break;
+                        }
+                        case 3:
+                        {
+                            PersonId.S_burthdate = Convert.ToInt32(helper.InfoUsers("Дата рождения"));
+                            PersonId.S_age = 2020 - PersonId.S_burthdate;
+                            break;
+                        }
+                        case 4:
+                        {
+                            PersonId.S_group = Convert.ToInt32(helper.InfoUsers("Группа"));
+                            break;
+                        }
+                    }
+
+                    using (BinaryWriter writer = new BinaryWriter(File.Open(path + $@"\{PersonId.S_login}.dat", FileMode.OpenOrCreate)))
+                    {
+                        writer.Write(PersonId.S_password);
+                        writer.Write(PersonId.S_fio);
+                        writer.Write(PersonId.S_burthdate);
+                        writer.Write(PersonId.S_age);
+                        writer.Write(PersonId.S_group);
+
+                    }
                     break;
                 }
                 case 2:
