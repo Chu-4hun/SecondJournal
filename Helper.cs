@@ -210,7 +210,6 @@ namespace Second_Journal
             
             return name;
         }
-
         public int intInfoUsers(string colums)
         {
             int num = 0;
@@ -223,6 +222,19 @@ namespace Second_Journal
 
             return num;
         }
+        public int intInfoJournals(string colums, string input)
+        {
+            int num = 0;
+            do
+            {
+                Console.Write($"{colums}: ");
+                num = Convert.ToInt32(Console.ReadLine());
+            } 
+            while (ValidationNUM(num) == false);
+
+            return num;
+        }
+        
         public bool ValidationENG(string name)
         {
             bool validation = true;

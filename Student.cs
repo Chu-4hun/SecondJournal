@@ -4,7 +4,7 @@ namespace Second_Journal
 {
     public class Student
     {
-        public string[] Menu = new string[] {"dd", "Journals","LogOut" };
+        public string[] Menu = new string[] {"Journals", "LogOut",};
         Helper helper = new Helper();
         public void MainSudent()
         {
@@ -20,14 +20,10 @@ namespace Second_Journal
                     }
                     case 1:
                     {
-                        Console.WriteLine("Not ready yet");
-                        break;
-                    }
-                    case 2:
-                    {
                         flag = false;
                         break;
                     }
+                    
                 }
                 Console.ReadKey();
             }

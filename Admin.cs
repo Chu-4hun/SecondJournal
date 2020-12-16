@@ -49,7 +49,6 @@ namespace Second_Journal
                 Console.ReadKey();
             }
         }
-
         public void CreateUser()
         {
             Console.Clear();
@@ -109,7 +108,8 @@ namespace Second_Journal
                     
                     
                     Console.WriteLine("*1-русский яз, 2-математика, 3-информатика* вводите единым числом");
-                    New.T_disciplines = helper.intInfoUsers("Дисциплины");
+                    string disciplines = Console.ReadLine();
+                    New.T_disciplines = helper.intInfoJournals("Дисциплины",disciplines);
                     New.T_burthdate = helper.intInfoUsers("Дата рождения");
                     New.T_age = 2020 - New.T_burthdate;
                     New.T_groups = helper.intInfoUsers("Группы");
@@ -129,7 +129,6 @@ namespace Second_Journal
                 }
             }
         }
-
         public void UpdateUser()
         {
             Console.Clear();
@@ -400,7 +399,6 @@ namespace Second_Journal
                 }
             }
         }
-
         public void ViewUsers()
         {
             Console.Clear();
