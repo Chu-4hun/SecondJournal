@@ -127,7 +127,7 @@ namespace Second_Journal
             string path = Directory.GetCurrentDirectory();
             switch (helper.Menu(role,0))
             {
-                case 1:
+                case 0:
                 {
                     path += @"\user\admin";
                     List<AdminStrtuct> adminStat = new List<AdminStrtuct>();
@@ -144,15 +144,38 @@ namespace Second_Journal
                             );
                         }
                     }
-                    Console.WriteLine(Allfile);
+                    int id = helper.PersonMenu(adminStat, 0);
+                    string[] parametr = new string[]{"Login", "Password"};
+                    var PersonId = adminStat[id];
+                    string safeLogin = PersonId.A_login;
+                    switch (helper.Menu(parametr,0))
+                    {
+                        case 0:
+                        {
+                            PersonId.A_login = helper.InfoUsers("Login");
+                            File.Delete(path + $@"\{safeLogin}.dat");
+                            break;
+                        }
+                        case 1:
+                        {
+                            PersonId.A_password = helper.InfoUsers("Password");
+                            break;
+                        }
+                    }
+
+                    using (BinaryWriter writer = new BinaryWriter(File.Open(path + $@"\{PersonId.A_login}.dat", FileMode.OpenOrCreate)))
+                    {
+                        writer.Write(PersonId.A_password);
+
+                    }
                     break;
                 }
-                case 2:
+                case 1:
                 {
                     path += @"\user\student";
                     break;
                 }
-                case 3:
+                case 2:
                 {
                     path += @"\user\teacher";
                     break;

@@ -50,7 +50,7 @@ namespace Second_Journal
                 }
             }
         }
-        /*public int PersonMenu (List<AdminStrtuct> menu, int StartString)
+        public int PersonMenu (List<AdminStrtuct> menu, int StartString)
         {
             ConsoleKeyInfo key;
             int index = StartString;
@@ -58,10 +58,10 @@ namespace Second_Journal
             while (true)
             {
                 Console.Clear();
-                int id = 1;
+                int id = 0;
                 foreach (AdminStrtuct m in menu)
                 {
-                    Console.WriteLine($"{id} {m.fio}");
+                    Console.WriteLine($"{id} {m.A_login}");
                     id++;
                 }
 
@@ -95,7 +95,7 @@ namespace Second_Journal
                 }
                 
             }
-        }*/
+        }
         public string InfoUsers(string colums)
         {
             string name = "";
