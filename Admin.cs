@@ -60,9 +60,11 @@ namespace Second_Journal
                 case 0:
                 {
                     Console.WriteLine("0");
+                    
                     AdminStrtuct New;
                     New.A_login = helper.InfoUsers("Login");
                     New.A_password = helper.InfoUsers("Password");
+                    
                     using (BinaryWriter writer = new BinaryWriter(File.Open(
                         $@"{Directory.GetCurrentDirectory()}\user\admin\{New.A_login}.dat", FileMode.OpenOrCreate)))
                     {
@@ -74,13 +76,16 @@ namespace Second_Journal
                 case 1:
                 {
                     Console.WriteLine("1");
+                    
                     StudentSruct New;
                     New.S_login = helper.InfoUsers("Login");
                     New.S_password = helper.InfoUsers("Password");
                     New.S_fio = helper.InfoUsers("ФИО");
-                    New.S_group = Convert.ToInt32(helper.InfoUsers("Группа"));
-                    New.S_burthdate = Convert.ToInt32(helper.InfoUsers("Дата рождения"));
+                    
+                    New.S_group =  helper.intInfoUsers("Группа");
+                    New.S_burthdate =  helper.intInfoUsers("Дата рождения");
                     New.S_age = 2020 - New.S_burthdate;
+                    
                     using (BinaryWriter writer = new BinaryWriter(File.Open(
                         $@"{Directory.GetCurrentDirectory()}\user\student\{New.S_login}.dat", FileMode.OpenOrCreate)))
                     {
@@ -96,14 +101,19 @@ namespace Second_Journal
                 case 2:
                 {
                     Console.WriteLine("2");
+                    
                     TeacherSruct New;
                     New.T_login = helper.InfoUsers("Login");
                     New.T_password = helper.InfoUsers("Password");
                     New.T_fio = helper.InfoUsers("ФИО");
-                    New.T_groups = Convert.ToInt32(helper.InfoUsers("Группа"));
-                    New.T_disciplines = Convert.ToInt32(helper.InfoUsers("Дисциплины"));
-                    New.T_burthdate = Convert.ToInt32(helper.InfoUsers("Дата рождения"));
+                    
+                    
+                    Console.WriteLine("*1-русский яз, 2-математика, 3-информатика* вводите единым числом");
+                    New.T_disciplines = helper.intInfoUsers("Дисциплины");
+                    New.T_burthdate = helper.intInfoUsers("Дата рождения");
                     New.T_age = 2020 - New.T_burthdate;
+                    New.T_groups = helper.intInfoUsers("Группы");
+                    
                     using (BinaryWriter writer = new BinaryWriter(File.Open(
                         $@"{Directory.GetCurrentDirectory()}\user\teacher\{New.T_login}.dat", FileMode.OpenOrCreate)))
                     {
@@ -184,6 +194,10 @@ namespace Second_Journal
                                 {
                                     S_login = Path.GetFileNameWithoutExtension(filename),
                                     S_password = reader.ReadString(),
+                                    S_fio = reader.ReadString(),
+                                    S_burthdate = reader.ReadInt32(),
+                                    S_age = reader.ReadInt32(),
+                                    S_group = reader.ReadInt32()
                                 }
                             );
                         }
@@ -212,20 +226,20 @@ namespace Second_Journal
                         }
                         case 3:
                         {
-                            PersonId.S_burthdate = Convert.ToInt32(helper.InfoUsers("Дата рождения"));
+                            PersonId.S_burthdate = helper.intInfoUsers("Дата рождения");
                             PersonId.S_age = 2020 - PersonId.S_burthdate;
                             break;
                         }
                         case 4:
                         {
-                            PersonId.S_group = Convert.ToInt32(helper.InfoUsers("Группа"));
+                            PersonId.S_group = helper.intInfoUsers("Группа");
                             break;
                         }
                     }
 
                     using (BinaryWriter writer = new BinaryWriter(File.Open(path + $@"\{PersonId.S_login}.dat", FileMode.OpenOrCreate)))
                     {
-                        writer.Write(PersonId.S_password);
+                        writer.Write(PersonId.S_password); 
                         writer.Write(PersonId.S_fio);
                         writer.Write(PersonId.S_burthdate);
                         writer.Write(PersonId.S_age);
@@ -237,6 +251,75 @@ namespace Second_Journal
                 case 2:
                 {
                     path += @"\user\teacher";
+                    
+                    List<TeacherSruct> teacherSruct = new List<TeacherSruct>();
+                    string[] Allfile = Directory.GetFiles(path);
+                    foreach (string filename in Allfile)
+                    {
+                        using (BinaryReader reader = new BinaryReader(File.Open(filename,FileMode.Open)))
+                        {
+                            teacherSruct.Add(new TeacherSruct()
+                                {
+                                    T_login = Path.GetFileNameWithoutExtension(filename),
+                                    T_password = reader.ReadString(),
+                                    T_fio = reader.ReadString(),
+                                    T_burthdate = reader.ReadInt32(),
+                                    T_age = reader.ReadInt32(),
+                                    T_groups = reader.ReadInt32()
+                                }
+                            );
+                        }
+                    }
+                    int id = helper.TeacherMenu(teacherSruct, 0);
+                    string[] parametr = new string[]{"Login", "Password", "ФИО","Burthdate","Groups"};
+                    var PersonId = teacherSruct[id];
+                    string safeLogin = PersonId.T_login;
+                    switch (helper.Menu(parametr,0))
+                    {
+                        case 0:
+                        {
+                            PersonId.T_login = helper.InfoUsers("Login");
+                            File.Delete(path + $@"\{safeLogin}.dat");
+                            break;
+                        }
+                        case 1:
+                        {
+                            PersonId.T_password = helper.InfoUsers("Password");
+                            break;
+                        }
+                        case 2:
+                        {
+                            PersonId.T_fio = helper.InfoUsers("ФИО");
+                            break;
+                        }
+                        case 3:
+                        {
+                            PersonId.T_burthdate = helper.intInfoUsers("Дата рождения");
+                            PersonId.T_age = 2020 - PersonId.T_burthdate;
+                            break;
+                        }
+                        case 4:
+                        {
+                            PersonId.T_disciplines = helper.intInfoUsers("Дисциплины");
+                            break;
+                        }
+                        case 5:
+                        {
+                            Console.WriteLine("*1-русский яз, 2-математика, 3-информатика* вводите единым числом");
+                            PersonId.T_groups = helper.intInfoUsers("Группы");
+                            break;
+                        }
+                    }
+
+                    using (BinaryWriter writer = new BinaryWriter(File.Open(path + $@"\{PersonId.T_login}.dat", FileMode.OpenOrCreate)))
+                    {
+                        writer.Write(PersonId.T_password);
+                        writer.Write(PersonId.T_fio);
+                        writer.Write(PersonId.T_groups);
+                        writer.Write(PersonId.T_disciplines);
+                        writer.Write(PersonId.T_burthdate);
+                        writer.Write(PersonId.T_age);
+                    }
                     break;
                 }
             }

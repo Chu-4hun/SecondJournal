@@ -142,6 +142,52 @@ namespace Second_Journal
                 
             }
         }
+        public int TeacherMenu (List<TeacherSruct> menu, int StartString)
+        {
+            ConsoleKeyInfo key;
+            int index = StartString;
+            int currentpos = index;
+            while (true)
+            {
+                Console.Clear();
+                int id = 0;
+                foreach (TeacherSruct m in menu)
+                {
+                    Console.WriteLine($"{id} {m.T_login}");
+                    id++;
+                }
+
+                Console.SetCursorPosition(0, index);
+                key = Console.ReadKey();
+                switch (key.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                    {
+                        index--;
+                        if (index < 0)
+                        {
+                            index = id - 1;
+                        }
+                        break;
+                    }
+                    case ConsoleKey.DownArrow:
+                    {
+                        index++;
+                        if (index >= id)
+                        {
+                            index = 0;
+                        }
+                        break;
+                    }
+                    case ConsoleKey.Enter:
+                    {
+                        Console.Clear();
+                        return index;
+                    }
+                }
+                
+            }
+        }
         public string InfoUsers(string colums)
         {
             string name = "";
@@ -161,15 +207,21 @@ namespace Second_Journal
                     name = Console.ReadLine();
                 } while (ValidationRUS(name)==false);
             }
-            else
-            {
-                do
-                {
-                    Console.Write($"{colums}: ");
-                    name = Console.ReadLine();
-                } while (ValidationNUM(name)==false);
-            }
+            
             return name;
+        }
+
+        public int intInfoUsers(string colums)
+        {
+            int num = 0;
+            do
+            {
+                Console.Write($"{colums}: ");
+                num = Convert.ToInt32(Console.ReadLine());
+            } 
+            while (ValidationNUM(num) == false);
+
+            return num;
         }
         public bool ValidationENG(string name)
         {
@@ -191,10 +243,11 @@ namespace Second_Journal
             }
             return validation;
         }
-        public bool ValidationNUM(string num)
+        public bool ValidationNUM(int num)
         {
             bool validation = true;
-            if (Regex.IsMatch(num, @"[-!#\$%&'\*\+/=\?\^`\{\}]"))
+            string strNum = Convert.ToString(num) ;
+            if (Regex.IsMatch(@"[-!#\$%&'\*\+/=\?\^`\{\}]", strNum))
             {
                 validation = false;
                 Console.WriteLine("ERR! Wrong symbols");

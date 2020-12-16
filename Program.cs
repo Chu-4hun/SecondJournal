@@ -124,7 +124,6 @@ namespace Second_Journal
                     {
                         Console.WriteLine("ERR 1! Wrong login - press ENTER");
                         Console.ReadKey();
-
                     }
                 }
 
