@@ -31,13 +31,13 @@ namespace Second_Journal
                     case 2:
                     {
                         Console.WriteLine("2");
-                        //DeleteUser();
+                        DeleteUser();
                         break;
                     }
                     case 3:
                     {
                         Console.WriteLine("4");
-                        //ViewUsers();
+                        ViewUsers();
                         break;
                     }
                     case 4:
@@ -325,6 +325,150 @@ namespace Second_Journal
             }
             
         }
-        
+        public void DeleteUser()
+        {
+            Console.Clear();
+            string[] role = new string[]{"Admin","Student","Teacher"};
+            string path = Directory.GetCurrentDirectory();
+            switch (helper.Menu(role,0))
+            {
+                case 0:
+                {
+                    path += @"\user\admin";
+                    List<AdminStrtuct> admin = new List<AdminStrtuct>();
+                    string[] Allfile = Directory.GetFiles(path);
+                        foreach (string filename in Allfile)
+                        {
+                            using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
+                            {
+                                admin.Add(new AdminStrtuct()
+                                    {
+                                        A_login = Path.GetFileNameWithoutExtension(filename),
+                                        A_password = reader.ReadString(),
+                                    }
+                                );
+                            }
+                        }
+                    int id = helper.AdminMenu(admin, 0);
+                    var PersonId = admin[id];
+                    File.Delete(path + $@"\{PersonId.A_login}.dat");
+                    break;
+                }
+                case 1:
+                {
+                    path += @"\user\student";
+                    List<StudentSruct> student = new List<StudentSruct>();
+                    string[] Allfile = Directory.GetFiles(path);
+                        foreach (string filename in Allfile)
+                        {
+                            using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
+                            {
+                                student.Add(new StudentSruct()
+                                    {
+                                        S_login = Path.GetFileNameWithoutExtension(filename),
+                                        S_password = reader.ReadString(),
+                                    }
+                                );
+                            }
+                        }
+                    int id = helper.StudentMenu(student, 0);
+                    var PersonId = student[id];
+                    File.Delete(path + $@"\{PersonId.S_login}.dat");
+                    break;
+                }
+                case 2:
+                {
+                    path += @"\user\teacher";
+                    List<TeacherSruct> teacher = new List<TeacherSruct>();
+                    string[] Allfile = Directory.GetFiles(path);
+                        foreach (string filename in Allfile)
+                        {
+                            using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
+                            {
+                                teacher.Add(new TeacherSruct()
+                                    {
+                                        T_login = Path.GetFileNameWithoutExtension(filename),
+                                        T_password = reader.ReadString(),
+                                    }
+                                );
+                            }
+                        }
+                    int id = helper.TeacherMenu(teacher, 0);
+                    var PersonId = teacher[id];
+                    File.Delete(path + $@"\{PersonId.T_login}.dat");
+                    break;
+                }
+            }
+        }
+
+        public void ViewUsers()
+        {
+            Console.Clear();
+            string[] role = new string[]{"Admin","Student","Teacher"};
+            string path = Directory.GetCurrentDirectory();
+            switch (helper.Menu(role,0))
+            {
+                case 0:
+                {
+                    path += @"\user\admin";
+                    List<AdminStrtuct> admin = new List<AdminStrtuct>();
+                    string[] Allfile = Directory.GetFiles(path);
+                        foreach (string filename in Allfile)
+                        {
+                            using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
+                            {
+                                admin.Add(new AdminStrtuct()
+                                    {
+                                        A_login = Path.GetFileNameWithoutExtension(filename),
+                                        A_password = reader.ReadString(),
+                                    }
+                                );
+                            }
+                        }
+                    int id = helper.AdminMenu(admin, 0);
+                    break;
+                }
+                case 1:
+                {
+                    path += @"\user\student";
+                    List<StudentSruct> student = new List<StudentSruct>();
+                    string[] Allfile = Directory.GetFiles(path);
+                        foreach (string filename in Allfile)
+                        {
+                            using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
+                            {
+                                student.Add(new StudentSruct()
+                                    {
+                                        S_login = Path.GetFileNameWithoutExtension(filename),
+                                        S_password = reader.ReadString(),
+                                    }
+                                );
+                            }
+                        }
+                    int id = helper.StudentMenu(student, 0);
+                    break;
+                }
+                case 2:
+                {
+                    path += @"\user\teacher";
+                    List<TeacherSruct> teacher = new List<TeacherSruct>();
+                    string[] Allfile = Directory.GetFiles(path);
+                        foreach (string filename in Allfile)
+                        {
+                            using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
+                            {
+                                teacher.Add(new TeacherSruct()
+                                    {
+                                        T_login = Path.GetFileNameWithoutExtension(filename),
+                                        T_password = reader.ReadString(),
+                                    }
+                                );
+                            }
+                        }
+                    int id = helper.TeacherMenu(teacher, 0);
+                    break;
+                }
+            }
+        }
     }
 }
