@@ -1,13 +1,17 @@
+﻿using Second_Journal;
 ﻿using System;
+using System.IO;
 using static Second_Journal.Program;
-namespace Second_Journal
+
+ namespace MPT_Journal
 {
-    public class Student
+    public class Teacher
     {
-        public string[] Menu = new string[] {"Journals", "LogOut",};
+        public string[] Menu = new string[] {"CreateJournal", "Journals","LogOut" };
         Helper helper = new Helper();
-        public void MainSudent()
+        public void MainTeacher()
         {
+            
             bool flag = true;
             while (flag)
             {
@@ -15,18 +19,27 @@ namespace Second_Journal
                 {
                     case 0:
                     {
-                        Console.WriteLine("Not ready yet");
+                        CreateJournal();
                         break;
                     }
                     case 1:
                     {
+                        Console.WriteLine("Not ready yet");
+                        break;
+                    }
+                    case 2:
+                    {
                         flag = false;
                         break;
                     }
-                    
                 }
                 Console.ReadKey();
             }
+        }
+
+        public void CreateJournal()
+        {
+            //Path.GetDirectoryName()
         }
     }
 }

@@ -231,7 +231,6 @@ namespace Second_Journal
                 num = Convert.ToInt32(Console.ReadLine());
             } 
             while (ValidationNUM(num) == false);
-
             return num;
         }
         

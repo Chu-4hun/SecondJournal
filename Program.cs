@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using MPT_Journal;
 using static Second_Journal.Helper;
 using static Second_Journal.Student;
 
@@ -108,8 +109,8 @@ namespace Second_Journal
                                     Console.WriteLine(Role);
                                     break;
                                 case 3:
-                                    //Teacher teacher = new Teacher();
-                                    //teacher.MainTeacher();
+                                    Teacher teacher = new Teacher();
+                                    teacher.MainTeacher();
                                     Console.WriteLine(Role);
                                     break;
                             }
