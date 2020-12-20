@@ -233,7 +233,31 @@ namespace Second_Journal
             while (ValidationNUM(num) == false);
             return num;
         }
-        
+
+        // public int[] GroupInfo(int input)
+        // {
+        //     int output = 00;
+        //     int[] mass = new int[100];
+        //     try
+        //     {
+        //         int inputcopy = input;
+        //
+        //         
+        //         for (int i = 2; i >= 0; i--)
+        //         {
+        //             mass[i] = inputcopy % 10;
+        //         }
+        //
+        //         int summ = mass[0] + mass[1] + mass[2];
+        //         if (summ>9) {Console.WriteLine("ERR!!");}
+        //     }
+        //     catch
+        //     {
+        //         Console.WriteLine("ERR!!");
+        //     }
+        //     
+        //     return mass;
+        // }
         public bool ValidationENG(string name)
         {
             bool validation = true;

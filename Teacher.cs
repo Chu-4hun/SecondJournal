@@ -2,6 +2,7 @@
 ﻿using System;
 using System.IO;
 using static Second_Journal.Program;
+using static Second_Journal.Helper;
 
  namespace MPT_Journal
 {
@@ -52,7 +53,43 @@ using static Second_Journal.Program;
 
         public void CreateJournal()
         {
-            
+            Console.Clear();
+            string[] journal = new string[]{"1ая группа","2ая группа","3я группа"};
+            switch (helper.Menu(journal,0))
+            {
+                case 0:
+                {
+                    if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user\journals\g1")))
+                    {
+                        Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals\g1");
+                    }
+
+                    path = path + @"\user\journals\g1";
+                    
+                    break;
+                }
+                case 1:
+                {
+                    if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user\journals\g2")))
+                    {
+                        Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals\g2");
+                    }
+                    
+                    path = path + @"\user\journals\g2";
+                    break;
+                }
+                case 2:
+                {
+                    if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user\journals\g3")))
+                    {
+                        Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals\g3");
+                    }
+                    
+                    path = path + @"\user\journals\g3";
+                    break;
+                }
+            }
         }
+        
     }
 }

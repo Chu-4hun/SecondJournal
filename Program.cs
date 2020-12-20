@@ -34,6 +34,7 @@ namespace Second_Journal
             public int T_disciplines;
             public int T_groups;
         }
+        
 
         static void Main(string[] args)
         {
@@ -44,6 +45,7 @@ namespace Second_Journal
                 Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\admin");
                 Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\student");
                 Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\teacher");
+                Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals");
             }
 
             if (!(File.Exists(Directory.GetCurrentDirectory()+@"\user\admin\admin.dat")))
