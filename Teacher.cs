@@ -9,8 +9,21 @@ using static Second_Journal.Program;
     {
         public string[] Menu = new string[] {"CreateJournal", "Journals","LogOut" };
         Helper helper = new Helper();
-        public void MainTeacher()
+
+        TeacherSruct New;
+        string path = Directory.GetCurrentDirectory();
+        public void MainTeacher(string login)
         {
+            using (BinaryReader reader = new BinaryReader(File.Open(path + $@"\user\teacher\{login}.dat", FileMode.Open)))
+            {
+                New.T_login = Path.GetFileNameWithoutExtension(path);
+                New.T_password = reader.ReadString();
+                New.T_fio = reader.ReadString();
+                New.T_groups = reader.ReadInt32();
+                New.T_disciplines = reader.ReadInt32();
+                New.T_burthdate = reader.ReadInt32();
+                New.T_age = 2020 - New.T_burthdate;
+            }    
             
             bool flag = true;
             while (flag)
@@ -39,7 +52,7 @@ using static Second_Journal.Program;
 
         public void CreateJournal()
         {
-            //Path.GetDirectoryName()
+            
         }
     }
 }

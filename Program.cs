@@ -110,7 +110,7 @@ namespace Second_Journal
                                     break;
                                 case 3:
                                     Teacher teacher = new Teacher();
-                                    teacher.MainTeacher();
+                                    teacher.MainTeacher(login);
                                     Console.WriteLine(Role);
                                     break;
                             }
