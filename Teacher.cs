@@ -21,10 +21,11 @@ using static Second_Journal.Helper;
                 New.T_password = reader.ReadString();
                 New.T_fio = reader.ReadString();
                 New.T_groups = reader.ReadInt32();
-                New.T_disciplines = reader.ReadInt32();
+                New.T_groups = kostil(New.T_groups);
+                New.T_disciplines = reader.ReadString();
                 New.T_burthdate = reader.ReadInt32();
                 New.T_age = 2020 - New.T_burthdate;
-            }    
+            }
             
             bool flag = true;
             while (flag)
@@ -33,7 +34,7 @@ using static Second_Journal.Helper;
                 {
                     case 0:
                     {
-                        CreateJournal();
+                        SwitchJournal();
                         break;
                     }
                     case 1:
@@ -51,7 +52,7 @@ using static Second_Journal.Helper;
             }
         }
 
-        public void CreateJournal()
+        public void SwitchJournal()
         {
             Console.Clear();
             string[] journal = new string[]{"1ая группа","2ая группа","3я группа"};
@@ -64,7 +65,16 @@ using static Second_Journal.Helper;
                         Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals\g1");
                     }
 
-                    path = path + @"\user\journals\g1";
+                    if (New.T_groups == 1)
+                    {
+                        path = path + @"\user\journals\g1";
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wrong group!!");
+                        break;
+                    }
+                    
                     
                     break;
                 }
@@ -75,7 +85,16 @@ using static Second_Journal.Helper;
                         Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals\g2");
                     }
                     
-                    path = path + @"\user\journals\g2";
+                    if (New.T_groups == 2 || New.T_groups == 23)
+                    {
+                        path = path + @"\user\journals\g2";
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wrong group!!");
+                        break;
+                    }
+                    
                     break;
                 }
                 case 2:
@@ -84,12 +103,64 @@ using static Second_Journal.Helper;
                     {
                         Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals\g3");
                     }
+                    if (New.T_groups == 3 || New.T_groups == 23)
+                    {
+                        path = path + @"\user\journals\g3";
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wrong group!!");
+                        break;
+                    }
                     
-                    path = path + @"\user\journals\g3";
+                    
                     break;
                 }
             }
         }
-        
+
+        public int kostil(int input)
+        {
+            int res = input;
+            switch (input)
+            {
+                case 1:
+                {
+                    res = 1;
+                    break;
+                }
+                case 12:
+                {
+                    goto case 1;
+                    break;
+                }
+                case 13:
+                {
+                    goto case 1;
+                    break;
+                }
+                case 21:
+                {
+                    res = 2;
+                    break;
+                }
+                case 23:
+                {
+                    res = 23;
+                    break;
+                }
+                case 31:
+                {
+                    res = 3;
+                    break;
+                }
+                case 32:
+                {
+                    goto case 23;
+                }
+            }
+
+            return res;
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace Second_Journal
             public string T_fio;
             public int T_burthdate;
             public int T_age;
-            public int T_disciplines;
+            public string T_disciplines;
             public int T_groups;
         }
         
@@ -125,7 +125,7 @@ namespace Second_Journal
                     }
                     catch
                     {
-                        Console.WriteLine("ERR 1! Wrong login - press ENTER");
+                        Console.WriteLine("ERR 1! press ENTER");
                         Console.ReadKey();
                     }
                 }

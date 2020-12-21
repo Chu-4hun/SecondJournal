@@ -105,10 +105,9 @@ namespace Second_Journal
                     New.T_login = helper.InfoUsers("Login");
                     New.T_password = helper.InfoUsers("Password");
                     New.T_fio = helper.InfoUsers("ФИО");
+                    Console.WriteLine("*рус яз, матем, информ*");
+                    New.T_disciplines = helper.InfoUsers("Дисциплины");
                     
-                    
-                    Console.WriteLine("1-русский яз, 2-математика, 3-информатика* вводите единым числом");
-                    New.T_disciplines = helper.intInfoJournals("Дисциплины",Console.ReadLine());
                     New.T_burthdate = helper.intInfoUsers("Дата рождения");
                     New.T_age = 2020 - New.T_burthdate;
                     New.T_groups = helper.intInfoUsers("Группы");
@@ -298,8 +297,8 @@ namespace Second_Journal
                         }
                         case 4:
                         {
-                            Console.WriteLine("*1-русский яз, 2-математика, 3-информатика* вводите единым числом");
-                            PersonId.T_disciplines = helper.intInfoUsers("Дисциплины");
+                            Console.WriteLine("*рус яз, матем, информ*");
+                            PersonId.T_disciplines = helper.InfoUsers("Дисциплины");
                             break;
                         }
                         case 5:
