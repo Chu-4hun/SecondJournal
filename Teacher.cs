@@ -1,5 +1,6 @@
 ﻿using Second_Journal;
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using static Second_Journal.Program;
 using static Second_Journal.Helper;
@@ -56,18 +57,23 @@ using static Second_Journal.Helper;
         {
             Console.Clear();
             string[] journal = new string[]{"1ая группа","2ая группа","3я группа"};
+            string groupcode = "";
+            int groupIdentifier = 0;
             switch (helper.Menu(journal,0))
             {
                 case 0:
                 {
-                    if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user\journals\g1")))
+                    if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user\journals")))
                     {
-                        Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals\g1");
+                        Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals");
                     }
 
                     if (New.T_groups == 1)
                     {
-                        path = path + @"\user\journals\g1";
+                        path = path + @"\user\journals";
+                        groupcode = "g1";
+                        groupIdentifier = 1;
+                        JournalCreate(groupcode,groupIdentifier);
                     }
                     else
                     {
@@ -80,14 +86,17 @@ using static Second_Journal.Helper;
                 }
                 case 1:
                 {
-                    if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user\journals\g2")))
+                    if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user\journals")))
                     {
-                        Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals\g2");
+                        Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals");
                     }
                     
                     if (New.T_groups == 2 || New.T_groups == 23)
                     {
-                        path = path + @"\user\journals\g2";
+                        path = path + @"\user\journals";
+                        groupcode = "g2";
+                        groupIdentifier = 2;
+                        JournalCreate(groupcode,groupIdentifier);
                     }
                     else
                     {
@@ -99,13 +108,16 @@ using static Second_Journal.Helper;
                 }
                 case 2:
                 {
-                    if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user\journals\g3")))
+                    if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user\journals")))
                     {
-                        Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals\g3");
+                        Directory.CreateDirectory($@"{Directory.GetCurrentDirectory()}\user\journals");
                     }
                     if (New.T_groups == 3 || New.T_groups == 23)
                     {
-                        path = path + @"\user\journals\g3";
+                        path = path + @"\user\journals";
+                        groupcode = "g3";
+                        groupIdentifier = 3;
+                        JournalCreate(groupcode,groupIdentifier);
                     }
                     else
                     {
@@ -120,10 +132,25 @@ using static Second_Journal.Helper;
         }
 
         
-        public void JournalCreate(string path)
+        public void JournalCreate(string groupcode,int identifier)
         {
+            Console.Clear();
+            Helper helper = new Helper();
             
+            Journal journal;
+            journal.J_Group = identifier; 
+            
+            
+            using (BinaryWriter writer = new BinaryWriter(File.Open(
+                        $@"{Directory.GetCurrentDirectory()}\user\journals\{groupcode}.dat", FileMode.OpenOrCreate)))
+                    {
+                        
+                    }
+                    Console.WriteLine("Complete!");
+
         }
+
+        
         public int kostil(int input)
         {
             int res = input;

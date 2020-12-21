@@ -34,6 +34,14 @@ namespace Second_Journal
             public string T_disciplines;
             public int T_groups;
         }
+
+        public struct Journal
+        {
+            public int J_Group;
+            public string[] J_Student;
+            public int[] J_Marks;
+            public DateTime J_Time;
+        }
         
 
         static void Main(string[] args)
