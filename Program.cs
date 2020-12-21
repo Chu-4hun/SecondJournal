@@ -107,7 +107,7 @@ namespace Second_Journal
                                     break;
                                 case 2:
                                     Student student = new Student();
-                                    student.MainSudent();
+                                    student.MainSudent(login);
                                     Console.WriteLine(Role);
                                     break;
                                 case 3:

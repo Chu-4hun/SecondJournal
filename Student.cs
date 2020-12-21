@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using static Second_Journal.Program;
 namespace Second_Journal
 {
@@ -6,8 +7,20 @@ namespace Second_Journal
     {
         public string[] Menu = new string[] {"Journals", "LogOut",};
         Helper helper = new Helper();
-        public void MainSudent()
+        StudentSruct New;
+        string path = Directory.GetCurrentDirectory();
+        public void MainSudent(string login)
         {
+            using (BinaryReader reader = new BinaryReader(File.Open(path + $@"\user\student\{login}.dat", FileMode.Open)))
+            {
+                New.S_login = Path.GetFileNameWithoutExtension(path);
+                New.S_password = reader.ReadString();
+                New.S_fio = reader.ReadString();
+                New.S_group = reader.ReadInt32();
+                New.S_burthdate = reader.ReadInt32();
+                New.S_age = 2020 - New.S_burthdate;
+            }
+
             bool flag = true;
             while (flag)
             {

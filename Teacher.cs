@@ -119,6 +119,11 @@ using static Second_Journal.Helper;
             }
         }
 
+        
+        public void JournalCreate(string path)
+        {
+            
+        }
         public int kostil(int input)
         {
             int res = input;
