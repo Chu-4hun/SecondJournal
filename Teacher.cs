@@ -2,6 +2,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using static Second_Journal.Program;
 using static Second_Journal.Helper;
 
@@ -139,47 +140,60 @@ using static Second_Journal.Helper;
             string studpath = Directory.GetCurrentDirectory() + @"\user\student";
             
             Journal journal = new Journal();
-            string[] studmas = new string[10];
+            int filesCount  = Directory.EnumerateFiles(studpath).Count();
+            string[] studmas = new string[filesCount];
             string[] Allfile = Directory.GetFiles(studpath);
 
-            for (int i = 0; i <= 9; i++)
+            for (int i = 0; i < filesCount; i++)
             {
                 studmas[i] = Path.GetFileNameWithoutExtension(Allfile[i]);
             }
-
-            // foreach (string filename in Allfile)
-            // {
-            //     i++;
-            //     if (i > 10)
-            //     {
-            //         break;
-            //     }
-            //     studmas[i] = Path.GetFileNameWithoutExtension(filename);
-            //     
-            // }
             
-            // journal.Dummy(studmas);
             journal.J_Group = identifier;
+            journal.J_Student = studmas;
+
+            int[] Marksmas = new int[filesCount];
+
+            for (int i = 0; i < filesCount; i++)
+            {
+                Console.WriteLine($"{studmas[i]}:");
+                try
+                {
+                    Marksmas[i] = Convert.ToInt32(Console.ReadLine());
+                    
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                
+            }
             
+            journal.J_Time = DateTime.Now;
             
-            using (BinaryWriter writer = new BinaryWriter(File.Open(
-                        $@"{Directory.GetCurrentDirectory()}\user\journals\{groupcode}.dat", FileMode.OpenOrCreate)))
+            for (int i = 0; i < filesCount; i++)
+            {
+                using (BinaryWriter writer = new BinaryWriter(File.Open(
+                        $@"{Directory.GetCurrentDirectory()}\user\journals\{groupcode}.dat", FileMode.Append)))
                     {
-                        writer.Write(studmas[0]);
-                        writer.Write(studmas[1]);
-                        writer.Write(studmas[2]);
-                        writer.Write(studmas[3]);
-                        writer.Write(studmas[4]);
-                        writer.Write(studmas[5]);
-                        writer.Write(studmas[6]);
-                        writer.Write(studmas[7]);
-                        writer.Write(studmas[8]);
-                        writer.Write(studmas[9]);
+                        writer.Write(journal.J_Student[i]);
+                        writer.Write(journal.J_Marks[i]);
+                        writer.Write(journal.J_Time.ToString("g"));
                     }
-                    Console.WriteLine("Complete!");
+            }
+            Console.WriteLine("Complete!");
+            
 
         }
 
+        public void JpurnalUpdate()
+        {
+            Console.Clear();
+            Helper helper = new Helper();
+            
+            
+        }
         
         public int kostil(int input)
         {
