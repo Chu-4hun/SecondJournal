@@ -135,25 +135,46 @@ using static Second_Journal.Helper;
         public void JournalCreate(string groupcode,int identifier)
         {
             Console.Clear();
-            string studDir = Directory.GetCurrentDirectory() + @"\user\student\";
             Helper helper = new Helper();
+            string studpath = Directory.GetCurrentDirectory() + @"\user\student";
             
-            Journal NewJournal = new Journal();
-            NewJournal.J_Group = identifier;
-            string[] mas = new[] {""};
-            NewJournal.Dummy(mas);
-            
-            string[] Allfile = Directory.GetFiles(studDir);
-            for (int i = 0; i > 100; i++)
+            Journal journal = new Journal();
+            string[] studmas = new string[10];
+            string[] Allfile = Directory.GetFiles(studpath);
+
+            for (int i = 0; i <= 9; i++)
             {
-                mas[i] = Path.GetFileNameWithoutExtension(Allfile[i]);
+                studmas[i] = Path.GetFileNameWithoutExtension(Allfile[i]);
             }
-            NewJournal.Dummy(mas);
+
+            // foreach (string filename in Allfile)
+            // {
+            //     i++;
+            //     if (i > 10)
+            //     {
+            //         break;
+            //     }
+            //     studmas[i] = Path.GetFileNameWithoutExtension(filename);
+            //     
+            // }
+            
+            // journal.Dummy(studmas);
+            journal.J_Group = identifier;
+            
             
             using (BinaryWriter writer = new BinaryWriter(File.Open(
                         $@"{Directory.GetCurrentDirectory()}\user\journals\{groupcode}.dat", FileMode.OpenOrCreate)))
                     {
-                        
+                        writer.Write(studmas[0]);
+                        writer.Write(studmas[1]);
+                        writer.Write(studmas[2]);
+                        writer.Write(studmas[3]);
+                        writer.Write(studmas[4]);
+                        writer.Write(studmas[5]);
+                        writer.Write(studmas[6]);
+                        writer.Write(studmas[7]);
+                        writer.Write(studmas[8]);
+                        writer.Write(studmas[9]);
                     }
                     Console.WriteLine("Complete!");
 
@@ -173,11 +194,12 @@ using static Second_Journal.Helper;
                 case 12:
                 {
                     goto case 1;
-                    
+                    break;
                 }
                 case 13:
                 {
                     goto case 1;
+                    break;
                 }
                 case 21:
                 {

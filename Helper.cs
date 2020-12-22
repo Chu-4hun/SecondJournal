@@ -218,6 +218,18 @@ namespace Second_Journal
 
             return name;
         }
+
+        public string[] InfoStudents(string colums)
+        {
+            Journal New = new Journal();
+            for (int i = 0; i != 10; i++)
+            {
+                Console.Write($"{colums}  {i}:");
+                New.J_Student[i] = Console.ReadLine();
+            }
+
+            return New.J_Student;
+        }
         public int intInfoUsers(string colums)
         {
             int num = 0;
@@ -230,6 +242,7 @@ namespace Second_Journal
 
             return num;
         }
+        
         public int intInfoJournals(string colums, string input)
         {
             int num = 0;
