@@ -81,8 +81,8 @@ namespace Second_Journal
                     New.S_password = helper.InfoUsers("Password");
                     New.S_fio = helper.InfoUsers("ФИО");
                     
-                    New.S_group =  helper.intInfoUsers("Группа");
-                    New.S_burthdate =  helper.intInfoUsers("Дата рождения");
+                    New.S_group =  helper.intInfoUsers("Group");
+                    New.S_burthdate =  helper.intInfoUsers("Year of birth");
                     New.S_age = 2020 - New.S_burthdate;
                     
                     using (BinaryWriter writer = new BinaryWriter(File.Open(
@@ -104,13 +104,13 @@ namespace Second_Journal
                     TeacherSruct New;
                     New.T_login = helper.InfoUsers("Login");
                     New.T_password = helper.InfoUsers("Password");
-                    New.T_fio = helper.InfoUsers("ФИО");
+                    New.T_fio = helper.InfoUsers("FIO");
                     Console.WriteLine("*рус яз, матем, информ*");
-                    New.T_disciplines = helper.InfoUsers("Дисциплины");
+                    New.T_disciplines = helper.InfoUsers("disciplines");
                     
-                    New.T_burthdate = helper.intInfoUsers("Дата рождения");
+                    New.T_burthdate = helper.intInfoUsers("date of birth");
                     New.T_age = 2020 - New.T_burthdate;
-                    New.T_groups = helper.intInfoUsers("Группы");
+                    New.T_groups = helper.intInfoUsers("Groups");
                     
                     using (BinaryWriter writer = new BinaryWriter(File.Open(
                         $@"{Directory.GetCurrentDirectory()}\user\teacher\{New.T_login}.dat", FileMode.OpenOrCreate)))

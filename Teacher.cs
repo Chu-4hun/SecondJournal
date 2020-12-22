@@ -135,11 +135,20 @@ using static Second_Journal.Helper;
         public void JournalCreate(string groupcode,int identifier)
         {
             Console.Clear();
+            string studDir = Directory.GetCurrentDirectory() + @"\user\student\";
             Helper helper = new Helper();
             
-            Journal journal;
-            journal.J_Group = identifier; 
+            Journal NewJournal = new Journal();
+            NewJournal.J_Group = identifier;
+            string[] mas = new[] {""};
+            NewJournal.Dummy(mas);
             
+            string[] Allfile = Directory.GetFiles(studDir);
+            for (int i = 0; i > 100; i++)
+            {
+                mas[i] = Path.GetFileNameWithoutExtension(Allfile[i]);
+            }
+            NewJournal.Dummy(mas);
             
             using (BinaryWriter writer = new BinaryWriter(File.Open(
                         $@"{Directory.GetCurrentDirectory()}\user\journals\{groupcode}.dat", FileMode.OpenOrCreate)))
@@ -164,12 +173,11 @@ using static Second_Journal.Helper;
                 case 12:
                 {
                     goto case 1;
-                    break;
+                    
                 }
                 case 13:
                 {
                     goto case 1;
-                    break;
                 }
                 case 21:
                 {

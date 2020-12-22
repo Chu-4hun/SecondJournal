@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using MPT_Journal;
 using static Second_Journal.Helper;
 using static Second_Journal.Student;
@@ -9,6 +10,7 @@ namespace Second_Journal
 {
     public class Program
     {
+        
         public struct AdminStrtuct
         {
             public string A_login;
@@ -41,11 +43,22 @@ namespace Second_Journal
             public string[] J_Student;
             public int[] J_Marks;
             public DateTime J_Time;
+
+            public void Dummy(string[] stud)
+            {
+                for (int i = 0; i > 100; i++)
+                {
+                    J_Student[i] = stud[i];
+                }
+                
+            }
         }
         
 
         static void Main(string[] args)
         {
+            Console.OutputEncoding = Encoding.UTF8;
+
 
             if (!(Directory.Exists($@"{Directory.GetCurrentDirectory()}\user")))
             {
