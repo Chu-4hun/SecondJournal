@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using MPT_Journal;
 using static Second_Journal.Helper;
 using static Second_Journal.Student;
 
@@ -43,15 +42,6 @@ namespace Second_Journal
             public string[] J_Student;
             public int[] J_Marks;
             public DateTime J_Time;
-
-            public void Dummy(string[] stud)
-            {
-                for (int i = 0; i <= 10; i++)
-                {
-                    J_Student[i] = stud[i];
-                }
-                
-            }
         }
         
 
@@ -91,8 +81,8 @@ namespace Second_Journal
                     Console.Write("Password: ");
                     string password = Console.ReadLine();
 
-                    try
-                    {
+                    // try
+                    // {
                         string path = Directory.GetCurrentDirectory();
                         int Role = 0;
                         if (File.Exists(path + $@"\user\admin\{login}.dat"))
@@ -143,12 +133,12 @@ namespace Second_Journal
                             Console.WriteLine("ERR 2! Wrong Password - press ENTER");
                             Console.ReadKey();
                         }
-                    }
-                    catch
-                    {
-                        Console.WriteLine("ERR 1! press ENTER");
-                        Console.ReadKey();
-                    }
+                    //}
+                    // catch
+                    // {
+                    //     Console.WriteLine("ERR 1! press ENTER");
+                    //     Console.ReadKey();
+                    // }
                 }
 
             }

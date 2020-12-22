@@ -1,16 +1,13 @@
-﻿using Second_Journal;
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using static Second_Journal.Program;
-using static Second_Journal.Helper;
 
- namespace MPT_Journal
+namespace Second_Journal
 {
     public class Teacher
     {
-        public string[] Menu = new string[] {"CreateJournal", "Journals","LogOut" };
+        public string[] Menu = new string[] {"CreateJournal", "View Journals","edit marks","LogOut" };
         Helper helper = new Helper();
 
         TeacherSruct New;
@@ -41,10 +38,15 @@ using static Second_Journal.Helper;
                     }
                     case 1:
                     {
-                        Console.WriteLine("Not ready yet");
+                        ViewJournals(New.T_groups);
                         break;
                     }
                     case 2:
+                    {
+                        ViewJournals(New.T_groups);
+                        break;
+                    }
+                    case 3:
                     {
                         flag = false;
                         break;
@@ -58,8 +60,6 @@ using static Second_Journal.Helper;
         {
             Console.Clear();
             string[] journal = new string[]{"1ая группа","2ая группа","3я группа"};
-            string groupcode = "";
-            int groupIdentifier = 0;
             switch (helper.Menu(journal,0))
             {
                 case 0:
@@ -72,14 +72,11 @@ using static Second_Journal.Helper;
                     if (New.T_groups == 1)
                     {
                         path = path + @"\user\journals";
-                        groupcode = "g1";
-                        groupIdentifier = 1;
-                        JournalCreate(groupcode,groupIdentifier);
+                        JournalCreate("g1",1);
                     }
                     else
                     {
                         Console.WriteLine("Wrong group!!");
-                        break;
                     }
                     
                     
@@ -95,14 +92,11 @@ using static Second_Journal.Helper;
                     if (New.T_groups == 2 || New.T_groups == 23)
                     {
                         path = path + @"\user\journals";
-                        groupcode = "g2";
-                        groupIdentifier = 2;
-                        JournalCreate(groupcode,groupIdentifier);
+                        JournalCreate("g2",2);
                     }
                     else
                     {
                         Console.WriteLine("Wrong group!!");
-                        break;
                     }
                     
                     break;
@@ -116,14 +110,11 @@ using static Second_Journal.Helper;
                     if (New.T_groups == 3 || New.T_groups == 23)
                     {
                         path = path + @"\user\journals";
-                        groupcode = "g3";
-                        groupIdentifier = 3;
-                        JournalCreate(groupcode,groupIdentifier);
+                        JournalCreate("g3",3);
                     }
                     else
                     {
                         Console.WriteLine("Wrong group!!");
-                        break;
                     }
                     
                     
@@ -136,7 +127,6 @@ using static Second_Journal.Helper;
         public void JournalCreate(string groupcode,int identifier)
         {
             Console.Clear();
-            Helper helper = new Helper();
             string studpath = Directory.GetCurrentDirectory() + @"\user\student";
             
             Journal journal = new Journal();
@@ -160,7 +150,7 @@ using static Second_Journal.Helper;
                 try
                 {
                     Marksmas[i] = Convert.ToInt32(Console.ReadLine());
-                    
+
                 }
                 catch (Exception e)
                 {
@@ -169,7 +159,8 @@ using static Second_Journal.Helper;
                 }
                 
             }
-            
+
+            journal.J_Marks = Marksmas;
             journal.J_Time = DateTime.Now;
             
             for (int i = 0; i < filesCount; i++)
@@ -187,11 +178,101 @@ using static Second_Journal.Helper;
 
         }
 
-        public void JpurnalUpdate()
+        public void ViewJournals(int groups)
         {
             Console.Clear();
-            Helper helper = new Helper();
+            Helper helper1 = new Helper();
             
+            string studpath = Directory.GetCurrentDirectory() + @"\user\student";
+            
+            int filesCount  = Directory.EnumerateFiles(studpath).Count();
+            string[] journalnames = new[]{"g1","g2","g3","<----"};
+            
+            Console.Clear();
+            
+            bool flag = true;
+            while (flag)
+            {
+                switch (helper1.Menu(journalnames, 0))
+                {
+                    case 0:
+                    {
+                        if (New.T_groups == 1)
+                        {
+                            string Jname = "g1";
+                            Console.WriteLine($"Журнал Номер - {Jname}");
+                            for (int i = 0; i < filesCount; i++)
+                            {
+                                using (BinaryReader reader  = new BinaryReader(File.Open(
+                                    $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                                {
+                                    Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine(reader.ReadInt32());
+                                    Console.WriteLine(reader.ReadString());
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong group!!");
+                        }
+
+                        break;
+                    }
+                    case 1:
+                    {
+                        if (New.T_groups == 2 || New.T_groups == 23)
+                        {
+                            string Jname = "g2";
+                            Console.WriteLine($"Журнал Номер - {Jname}");
+                            using (BinaryReader reader = new BinaryReader(File.Open(
+                                $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                            {
+                                for (int i = 0; i < filesCount; i++)
+                                {
+                                    Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine(reader.ReadInt32());
+                                    Console.WriteLine(reader.ReadString());
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong group!!");
+                        }
+                        break;
+                    }
+                    case 2:
+                    {
+                        if (New.T_groups == 3 || New.T_groups == 23)
+                        {
+                            string Jname = "g3";
+                            Console.WriteLine($"Журнал Номер - {Jname}");
+                            for (int i = 0; i < filesCount; i++)
+                            {
+                                using (BinaryReader reader  = new BinaryReader(File.Open(
+                                    $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                                {
+                                    Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine(reader.ReadInt32());
+                                    Console.WriteLine(reader.ReadString());
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong group!!");
+                        }
+                        break;
+                    }
+                    case 3:
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+                Console.ReadKey();
+            }
             
         }
         
@@ -208,12 +289,10 @@ using static Second_Journal.Helper;
                 case 12:
                 {
                     goto case 1;
-                    break;
                 }
                 case 13:
                 {
                     goto case 1;
-                    break;
                 }
                 case 21:
                 {
