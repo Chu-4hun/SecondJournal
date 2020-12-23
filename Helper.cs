@@ -96,7 +96,7 @@ namespace Second_Journal
                 
             }
         }
-        public int StudentMenu (List<StudentSruct> menu, int StartString)
+        public int StudentMenu (List<StudentStrtuct> menu, int StartString)
         {
             ConsoleKeyInfo key;
             int index = StartString;
@@ -105,7 +105,7 @@ namespace Second_Journal
             {
                 Console.Clear();
                 int id = 0;
-                foreach (StudentSruct m in menu)
+                foreach (StudentStrtuct m in menu)
                 {
                     Console.WriteLine($"{id} {m.S_login}");
                     id++;
@@ -142,7 +142,7 @@ namespace Second_Journal
                 
             }
         }
-        public int TeacherMenu (List<TeacherSruct> menu, int StartString)
+        public int TeacherMenu (List<TeacherStrtuct> menu, int StartString)
         {
             ConsoleKeyInfo key;
             int index = StartString;
@@ -151,7 +151,7 @@ namespace Second_Journal
             {
                 Console.Clear();
                 int id = 0;
-                foreach (TeacherSruct m in menu)
+                foreach (TeacherStrtuct m in menu)
                 {
                     Console.WriteLine($"{id} {m.T_login}");
                     id++;
@@ -221,7 +221,7 @@ namespace Second_Journal
 
         public string[] InfoStudents(string colums)
         {
-            Journal New = new Journal();
+            JournalStruct New = new JournalStruct();
             for (int i = 0; i != 10; i++)
             {
                 Console.Write($"{colums}  {i}:");

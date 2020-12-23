@@ -7,7 +7,7 @@ namespace Second_Journal
     {
         public string[] Menu = new string[] {"Journals", "LogOut",};
         Helper helper = new Helper();
-        StudentSruct New;
+        StudentStrtuct New;
         string path = Directory.GetCurrentDirectory();
         public void MainSudent(string login)
         {

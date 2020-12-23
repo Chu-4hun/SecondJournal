@@ -76,7 +76,7 @@ namespace Second_Journal
                 {
                     Console.WriteLine("1");
                     
-                    StudentSruct New;
+                    StudentStrtuct New;
                     New.S_login = helper.InfoUsers("Login");
                     New.S_password = helper.InfoUsers("Password");
                     New.S_fio = helper.InfoUsers("ФИО");
@@ -101,7 +101,7 @@ namespace Second_Journal
                 {
                     Console.WriteLine("2");
                     
-                    TeacherSruct New;
+                    TeacherStrtuct New;
                     New.T_login = helper.InfoUsers("Login");
                     New.T_password = helper.InfoUsers("Password");
                     New.T_fio = helper.InfoUsers("FIO");
@@ -181,13 +181,13 @@ namespace Second_Journal
                 {
                     path += @"\user\student";
                     
-                    List<StudentSruct> studentSruct = new List<StudentSruct>();
+                    List<StudentStrtuct> studentSruct = new List<StudentStrtuct>();
                     string[] Allfile = Directory.GetFiles(path);
                     foreach (string filename in Allfile)
                     {
                         using (BinaryReader reader = new BinaryReader(File.Open(filename,FileMode.Open)))
                         {
-                            studentSruct.Add(new StudentSruct()
+                            studentSruct.Add(new StudentStrtuct()
                                 {
                                     S_login = Path.GetFileNameWithoutExtension(filename),
                                     S_password = reader.ReadString(),
@@ -249,13 +249,13 @@ namespace Second_Journal
                 {
                     path += @"\user\teacher";
                     
-                    List<TeacherSruct> teacherSruct = new List<TeacherSruct>();
+                    List<TeacherStrtuct> teacherSruct = new List<TeacherStrtuct>();
                     string[] Allfile = Directory.GetFiles(path);
                     foreach (string filename in Allfile)
                     {
                         using (BinaryReader reader = new BinaryReader(File.Open(filename,FileMode.Open)))
                         {
-                            teacherSruct.Add(new TeacherSruct()
+                            teacherSruct.Add(new TeacherStrtuct()
                                 {
                                     T_login = Path.GetFileNameWithoutExtension(filename),
                                     T_password = reader.ReadString(),
@@ -354,13 +354,13 @@ namespace Second_Journal
                 case 1:
                 {
                     path += @"\user\student";
-                    List<StudentSruct> student = new List<StudentSruct>();
+                    List<StudentStrtuct> student = new List<StudentStrtuct>();
                     string[] Allfile = Directory.GetFiles(path);
                         foreach (string filename in Allfile)
                         {
                             using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
                             {
-                                student.Add(new StudentSruct()
+                                student.Add(new StudentStrtuct()
                                     {
                                         S_login = Path.GetFileNameWithoutExtension(filename),
                                         S_password = reader.ReadString(),
@@ -376,13 +376,13 @@ namespace Second_Journal
                 case 2:
                 {
                     path += @"\user\teacher";
-                    List<TeacherSruct> teacher = new List<TeacherSruct>();
+                    List<TeacherStrtuct> teacher = new List<TeacherStrtuct>();
                     string[] Allfile = Directory.GetFiles(path);
                         foreach (string filename in Allfile)
                         {
                             using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
                             {
-                                teacher.Add(new TeacherSruct()
+                                teacher.Add(new TeacherStrtuct()
                                     {
                                         T_login = Path.GetFileNameWithoutExtension(filename),
                                         T_password = reader.ReadString(),
@@ -427,13 +427,13 @@ namespace Second_Journal
                 case 1:
                 {
                     path += @"\user\student";
-                    List<StudentSruct> student = new List<StudentSruct>();
+                    List<StudentStrtuct> student = new List<StudentStrtuct>();
                     string[] Allfile = Directory.GetFiles(path);
                         foreach (string filename in Allfile)
                         {
                             using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
                             {
-                                student.Add(new StudentSruct()
+                                student.Add(new StudentStrtuct()
                                     {
                                         S_login = Path.GetFileNameWithoutExtension(filename),
                                         S_password = reader.ReadString(),
@@ -447,13 +447,13 @@ namespace Second_Journal
                 case 2:
                 {
                     path += @"\user\teacher";
-                    List<TeacherSruct> teacher = new List<TeacherSruct>();
+                    List<TeacherStrtuct> teacher = new List<TeacherStrtuct>();
                     string[] Allfile = Directory.GetFiles(path);
                         foreach (string filename in Allfile)
                         {
                             using (BinaryReader reader = new BinaryReader(File.Open(filename, FileMode.Open)))
                             {
-                                teacher.Add(new TeacherSruct()
+                                teacher.Add(new TeacherStrtuct()
                                     {
                                         T_login = Path.GetFileNameWithoutExtension(filename),
                                         T_password = reader.ReadString(),

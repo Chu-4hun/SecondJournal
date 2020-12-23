@@ -16,7 +16,7 @@ namespace Second_Journal
             public string A_password;
         }
         
-        public struct StudentSruct
+        public struct StudentStrtuct
         {
             public string S_login;
             public string S_password;
@@ -25,7 +25,7 @@ namespace Second_Journal
             public int S_age;
             public int S_group;
         }
-        public struct TeacherSruct
+        public struct TeacherStrtuct
         {
             public string T_login;
             public string T_password;
@@ -36,7 +36,7 @@ namespace Second_Journal
             public int T_groups;
         }
 
-        public struct Journal
+        public struct JournalStruct
         {
             public int J_Group;
             public string[] J_Student;

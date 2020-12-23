@@ -10,7 +10,7 @@ namespace Second_Journal
         public string[] Menu = new string[] {"CreateJournal", "View Journals","edit marks","LogOut" };
         Helper helper = new Helper();
 
-        TeacherSruct New;
+        TeacherStrtuct New;
         string path = Directory.GetCurrentDirectory();
         public void MainTeacher(string login)
         {
@@ -43,7 +43,7 @@ namespace Second_Journal
                     }
                     case 2:
                     {
-                        ViewJournals(New.T_groups);
+                        EditMarks();
                         break;
                     }
                     case 3:
@@ -129,7 +129,7 @@ namespace Second_Journal
             Console.Clear();
             string studpath = Directory.GetCurrentDirectory() + @"\user\student";
             
-            Journal journal = new Journal();
+            JournalStruct journalStruct = new JournalStruct();
             int filesCount  = Directory.EnumerateFiles(studpath).Count();
             string[] studmas = new string[filesCount];
             string[] Allfile = Directory.GetFiles(studpath);
@@ -139,8 +139,8 @@ namespace Second_Journal
                 studmas[i] = Path.GetFileNameWithoutExtension(Allfile[i]);
             }
             
-            journal.J_Group = identifier;
-            journal.J_Student = studmas;
+            journalStruct.J_Group = identifier;
+            journalStruct.J_Student = studmas;
 
             int[] Marksmas = new int[filesCount];
 
@@ -160,17 +160,17 @@ namespace Second_Journal
                 
             }
 
-            journal.J_Marks = Marksmas;
-            journal.J_Time = DateTime.Now;
+            journalStruct.J_Marks = Marksmas;
+            journalStruct.J_Time = DateTime.Now;
             
             for (int i = 0; i < filesCount; i++)
             {
                 using (BinaryWriter writer = new BinaryWriter(File.Open(
                         $@"{Directory.GetCurrentDirectory()}\user\journals\{groupcode}.dat", FileMode.Append)))
                     {
-                        writer.Write(journal.J_Student[i]);
-                        writer.Write(journal.J_Marks[i]);
-                        writer.Write(journal.J_Time.ToString("g"));
+                        writer.Write(journalStruct.J_Student[i]);
+                        writer.Write(journalStruct.J_Marks[i]);
+                        writer.Write(journalStruct.J_Time.ToString("g"));
                     }
             }
             Console.WriteLine("Complete!");
@@ -201,16 +201,19 @@ namespace Second_Journal
                         {
                             string Jname = "g1";
                             Console.WriteLine($"Журнал Номер - {Jname}");
-                            for (int i = 0; i < filesCount; i++)
+
+
+                            using (BinaryReader reader = new BinaryReader(File.Open(
+                                $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
                             {
-                                using (BinaryReader reader  = new BinaryReader(File.Open(
-                                    $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                                for (int i = 0; i < filesCount; i++)
                                 {
                                     Console.WriteLine(reader.ReadString());
                                     Console.WriteLine(reader.ReadInt32());
                                     Console.WriteLine(reader.ReadString());
                                 }
                             }
+                            
                         }
                         else
                         {
@@ -248,10 +251,11 @@ namespace Second_Journal
                         {
                             string Jname = "g3";
                             Console.WriteLine($"Журнал Номер - {Jname}");
-                            for (int i = 0; i < filesCount; i++)
+                            
+                            using (BinaryReader reader = new BinaryReader(File.Open(
+                                $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
                             {
-                                using (BinaryReader reader  = new BinaryReader(File.Open(
-                                    $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                                for (int i = 0; i < filesCount; i++)
                                 {
                                     Console.WriteLine(reader.ReadString());
                                     Console.WriteLine(reader.ReadInt32());
@@ -271,11 +275,175 @@ namespace Second_Journal
                         break;
                     }
                 }
-                Console.ReadKey();
             }
-            
         }
-        
+
+        public void EditMarks()
+        {
+            Console.Clear();
+            Helper helper1 = new Helper();
+            JournalStruct journal = new JournalStruct();
+
+            string studpath = Directory.GetCurrentDirectory() + @"\user\student";
+
+            int filesCount = Directory.EnumerateFiles(studpath).Count();
+            string[] journalnames = new[] {"g1", "g2", "g3", "<----"};
+
+            bool flag = true;
+            while (flag)
+            {
+                switch (helper1.Menu(journalnames, 0))
+                {
+                    case 0:
+                    {
+                        if (New.T_groups == 1)
+                        {
+                            string Jname = "g1";
+                            Console.WriteLine($"Журнал Номер - {Jname}");
+                            
+                            string[] studentmas = new string[filesCount];
+                            int[] marksmas = new int[filesCount];
+                            DateTime time = DateTime.Now;
+
+
+                            using (BinaryReader reader = new BinaryReader(File.Open(
+                                $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                            {
+                                for (int i = 0; i < filesCount; i++)
+                                {
+                                    studentmas[i] = reader.ReadString();
+                                    marksmas[i] = (reader.ReadInt32());
+                                    time = Convert.ToDateTime(reader.ReadString());
+                                }
+                            }
+
+
+                            journal.J_Student = studentmas;
+                            journal.J_Marks = marksmas;
+                            journal.J_Time = time;
+                            journal.J_Group = 1;
+
+                            UserChoose(journal.J_Student, journal.J_Marks, journal.J_Time, Jname);
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong group!!");
+                        }
+
+                        break;
+                    }
+                    case 1:
+                    {
+                        if (New.T_groups == 2 || New.T_groups == 23)
+                        {
+                            string Jname = "g2";
+                            Console.WriteLine($"Журнал Номер - {Jname}");
+                            
+                            string[] studentmas = new string[filesCount];
+                            int[] marksmas = new int[filesCount];
+                            DateTime time = DateTime.Now;
+
+
+                            using (BinaryReader reader = new BinaryReader(File.Open(
+                                $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                            {
+                                for (int i = 0; i < filesCount; i++)
+                                {
+                                    studentmas[i] = reader.ReadString();
+                                    marksmas[i] = (reader.ReadInt32());
+                                    time = Convert.ToDateTime(reader.ReadString());
+                                }
+                            }
+
+
+                            journal.J_Student = studentmas;
+                            journal.J_Marks = marksmas;
+                            journal.J_Time = time;
+                            journal.J_Group = 2;
+
+                            UserChoose(journal.J_Student, journal.J_Marks, journal.J_Time, Jname);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong group!!");
+                        }
+
+                        break;
+                    }
+                    case 2:
+                    {
+                        if (New.T_groups == 3 || New.T_groups == 23)
+                        {
+                            string Jname = "g3";
+                            Console.WriteLine($"Журнал Номер - {Jname}");
+                            
+                            string[] studentmas = new string[filesCount];
+                            int[] marksmas = new int[filesCount];
+                            DateTime time = DateTime.Now;
+
+
+                            using (BinaryReader reader = new BinaryReader(File.Open(
+                                $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                            {
+                                for (int i = 0; i < filesCount; i++)
+                                {
+                                    studentmas[i] = reader.ReadString();
+                                    marksmas[i] = (reader.ReadInt32());
+                                    time = Convert.ToDateTime(reader.ReadString());
+                                }
+                            }
+
+
+                            journal.J_Student = studentmas;
+                            journal.J_Marks = marksmas;
+                            journal.J_Time = time;
+                            journal.J_Group = 3;
+
+                            UserChoose(journal.J_Student, journal.J_Marks, journal.J_Time, Jname);
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong group!!");
+                        }
+
+                        break;
+                    }
+                    case 3:
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void UserChoose(string[] students, int[] mark, DateTime NewTime, string Jname)
+        {
+            int res = (helper.Menu(students, 0));
+
+            string studpath = Directory.GetCurrentDirectory() + @"\user\student";
+            int filesCount = Directory.EnumerateFiles(studpath).Count();
+
+            Console.WriteLine(mark[res]);
+            Console.WriteLine(NewTime);
+            Console.Write("Введите новую оценку:");
+
+            mark[res] = Convert.ToInt32(Console.ReadLine());
+            NewTime = DateTime.Now;
+
+            using (BinaryWriter writer = new BinaryWriter(
+                File.Open($@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Create)))
+            {
+                for (int i = 0; i < filesCount; i++)
+                {
+                    writer.Write(students[i]);
+                    writer.Write(mark[i]);
+                    writer.Write(NewTime.ToString("g"));
+                }
+            }
+        }
         public int kostil(int input)
         {
             int res = input;
