@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using static Second_Journal.Helper;
-using static Second_Journal.Student;
 
 namespace Second_Journal
 {
@@ -45,7 +42,7 @@ namespace Second_Journal
         }
         
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.OutputEncoding = Encoding.UTF8;
 
