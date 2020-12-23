@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using static Second_Journal.Program;
 namespace Second_Journal
 {
@@ -28,7 +29,7 @@ namespace Second_Journal
                 {
                     case 0:
                     {
-                        Console.WriteLine("Not ready yet");
+                        ViewJournals();
                         break;
                     }
                     case 1:
@@ -39,6 +40,114 @@ namespace Second_Journal
                     
                 }
                 Console.ReadKey();
+            }
+        }
+        public void ViewJournals()
+        {
+            Console.Clear();
+
+            string studpath = Directory.GetCurrentDirectory() + @"\user\student";
+            
+            int filesCount  = Directory.EnumerateFiles(studpath).Count();
+            string[] journalnames = new[]{"g1","g2","g3","<----"};
+            
+            Console.Clear();
+            
+            bool flag = true;
+            while (flag)
+            {
+                switch (helper.Menu(journalnames, 0))
+                {
+                    case 0:
+                    {
+                        if (New.S_group == 1)
+                        {
+                            string Jname = "g1";
+                            Console.WriteLine($"Журнал Номер - {Jname}");
+
+
+                            using (BinaryReader reader = new BinaryReader(File.Open(
+                                $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                            {
+                                for (int i = 0; i < filesCount; i++)
+                                {
+                                    Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine(reader.ReadInt32());
+                                    Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine("___________________________");
+                                }
+                            }
+
+                            Console.ReadKey();
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong group!!");
+                            Console.ReadKey();
+                        }
+
+                        break;
+                    }
+                    case 1:
+                    {
+                        if (New.S_group == 2)
+                        {
+                            string Jname = "g2";
+                            Console.WriteLine($"Журнал Номер - {Jname}");
+                            using (BinaryReader reader = new BinaryReader(File.Open(
+                                $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                            {
+                                for (int i = 0; i < filesCount; i++)
+                                {
+                                    Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine(reader.ReadInt32());
+                                    Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine("___________________________");
+                                }
+                            }
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong group!!");
+                            Console.ReadKey();
+                        }
+                        break;
+                    }
+                    case 2:
+                    {
+                        if (New.S_group == 3)
+                        {
+                            string Jname = "g3";
+                            Console.WriteLine($"Журнал Номер - {Jname}");
+                            
+                            using (BinaryReader reader = new BinaryReader(File.Open(
+                                $@"{Directory.GetCurrentDirectory()}\user\journals\{Jname}.dat", FileMode.Open)))
+                            {
+                                for (int i = 0; i < filesCount; i++)
+                                {
+                                    Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine(reader.ReadInt32());
+                                    Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine("___________________________");
+                                }
+                            }
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Wrong group!!");
+                            Console.ReadKey();
+                        }
+                        break;
+                    }
+                    case 3:
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
             }
         }
     }

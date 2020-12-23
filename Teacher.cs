@@ -211,13 +211,15 @@ namespace Second_Journal
                                     Console.WriteLine(reader.ReadString());
                                     Console.WriteLine(reader.ReadInt32());
                                     Console.WriteLine(reader.ReadString());
+                                    Console.WriteLine("___________________________");
                                 }
                             }
-                            
+                            Console.ReadKey();
                         }
                         else
                         {
                             Console.WriteLine("Wrong group!!");
+                            Console.ReadKey();
                         }
 
                         break;
@@ -238,10 +240,12 @@ namespace Second_Journal
                                     Console.WriteLine(reader.ReadString());
                                 }
                             }
+                            Console.ReadKey();
                         }
                         else
                         {
                             Console.WriteLine("Wrong group!!");
+                            Console.ReadKey();
                         }
                         break;
                     }
@@ -262,10 +266,12 @@ namespace Second_Journal
                                     Console.WriteLine(reader.ReadString());
                                 }
                             }
+                            Console.ReadKey();
                         }
                         else
                         {
                             Console.WriteLine("Wrong group!!");
+                            Console.ReadKey();
                         }
                         break;
                     }
